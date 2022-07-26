@@ -1,16 +1,39 @@
-import React, { useState, useEffect } from "react";
-import * as BooksAPI from "../BooksAPI";
-function MyReads() {
-	const [books, setBooks] = useState([]);
-	useEffect(() => {
-		BooksAPI.getAll().then((data) => setBooks(data));
-	}, []);
-	console.log(books);
+import React from "react";
+import BookShelf from "../components/BookShelf";
+import { Link } from "react-router-dom";
+function MyReads({ books, addBook }) {
 	return (
-		<div>
-			{books.map((book) => (
+		<div className="list-books">
+			<div className="list-books-title">
+				<h1>MyReads</h1>
+			</div>
+			<div className="list-books-content">
+				<div>
+					<BookShelf
+						shelfTitle="Currently Reading"
+						books={books.filter((book) => book.shelf === "currentlyReading")}
+						addBook={addBook}
+					/>
+					<BookShelf
+						shelfTitle="Want to Read"
+						books={books.filter((book) => book.shelf === "wantToRead")}
+						addBook={addBook}
+					/>
+					<BookShelf
+						shelfTitle="Read"
+						books={books.filter((book) => book.shelf === "read")}
+						addBook={addBook}
+					/>
+				</div>
+			</div>
+
+			<Link to="/search" className="open-search">
+				<span>Add a book</span>
+			</Link>
+
+			{/* {books.map((book) => (
 				<p key={book.id}>{book.title}</p>
-			))}
+			))} */}
 		</div>
 	);
 }
