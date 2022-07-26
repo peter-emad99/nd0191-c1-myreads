@@ -1,15 +1,25 @@
 import "./App.css";
 import MyReads from "./Pages/MyReads";
-import SearchInput from "./components/SearchInput";
 import { Route, Routes } from "react-router-dom";
+import SearchPage from "./Pages/SearchPage";
+import { useEffect, useState } from "react";
+import * as BooksAPI from "./BooksAPI";
 
 function App() {
+	const [books, setBooks] = useState([]);
+	const addBook = (book) => {
+		setBooks([...books.filter((item) => item.id !== book.id), book]);
+		console.log(book);
+	};
+	useEffect(() => {
+		BooksAPI.getAll().then((data) => setBooks(data));
+	}, []);
 	return (
 		<div>
 			{" "}
 			<Routes>
-				<Route path="/" element={<MyReads />} />
-				<Route path="/search" element={<SearchInput />} />
+				<Route path="/" element={<MyReads books={books} addBook={addBook} />} />
+				<Route path="/search" element={<SearchPage books={books} addBook={addBook} />} />
 			</Routes>
 		</div>
 	);
