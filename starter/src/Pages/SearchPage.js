@@ -42,7 +42,16 @@ function SearchPage({ books, addBook }) {
 					{searchedBooks.length !== 0
 						? searchedBooks
 								.filter((book) => book?.imageLinks?.smallThumbnail)
-								.map((book) => <Book key={book.id} book={book} addBook={addBook} />)
+								.map((book) => {
+									let existedBook = books.find(
+										(existedBook) => existedBook.id === book.id
+									);
+									return existedBook ? (
+										<Book key={book.id} book={existedBook} addBook={addBook} />
+									) : (
+										<Book key={book.id} book={book} addBook={addBook} />
+									);
+								})
 						: ""}
 				</ol>
 			</div>
