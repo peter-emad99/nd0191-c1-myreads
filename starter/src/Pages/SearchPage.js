@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import * as BooksAPI from "../BooksAPI";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import Book from "../components/Book";
 import PropTypes from "prop-types";
+import debounce from "lodash.debounce";
 
 function SearchPage({ books, addBook }) {
 	const [query, setQuery] = useState("");
@@ -21,12 +22,18 @@ function SearchPage({ books, addBook }) {
 			setSearchedBooks([]);
 		}
 	}, [query]);
-
+	useEffect(() => {
+		return () => {
+			debouncedHandleSearch.cancel();
+		};
+	}, []);
 	function handleSearch(e) {
 		// setInterval(setQuery(e.target.value), 10000);
 		// TODO: throttling and debouncing
 		setQuery(e.target.value);
 	}
+	const debouncedHandleSearch = useMemo(() => debounce(handleSearch, 400), []);
+
 	return (
 		<div className="search-books">
 			<div className="search-books-bar">
@@ -36,7 +43,7 @@ function SearchPage({ books, addBook }) {
 				<div className="search-books-input-wrapper">
 					<input
 						ref={inputElem}
-						onChange={handleSearch}
+						onChange={debouncedHandleSearch}
 						type="text"
 						placeholder="Search by title, author, or ISBN"
 					/>
