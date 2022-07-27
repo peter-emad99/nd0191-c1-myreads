@@ -30,8 +30,11 @@ function Book({ book, addBook }) {
 						}}
 					></div>
 					<div className="book-shelf-changer">
-						<select defaultValue={book.shelf} onChange={changeShelf}>
-							<option value="none" disabled>
+						<select
+							defaultValue={book.shelf ? book.shelf : "none"}
+							onChange={changeShelf}
+						>
+							<option value="" disabled>
 								Move to...
 							</option>
 							<option value="currentlyReading">Currently Reading</option>
