@@ -1,15 +1,15 @@
-import React, { useRef } from "react";
+import React from "react";
 import * as BooksAPI from "../BooksAPI";
 
 function Book({ book, addBook }) {
 	// const selectElement = useRef();
-	// selectElement.value = book.shelf;
-	// console.log(selectElement.value);
+
 	/**@param {Event} e */
 	function changeShelf(e) {
-		BooksAPI.update(book, e.target.value);
+		let shelf = e.target.value;
+		BooksAPI.update(book, shelf);
+		book.shelf = shelf;
 		addBook(book);
-		// console.log(e.target.value);
 	}
 	const {
 		authors,
@@ -29,7 +29,7 @@ function Book({ book, addBook }) {
 						}}
 					></div>
 					<div className="book-shelf-changer">
-						<select onChange={changeShelf}>
+						<select defaultValue={book.shelf} onChange={changeShelf}>
 							<option value="none" disabled>
 								Move to...
 							</option>
