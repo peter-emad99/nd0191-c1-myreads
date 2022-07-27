@@ -40,9 +40,9 @@ function SearchPage({ books, addBook }) {
 			<div className="search-books-results">
 				<ol className="books-grid">
 					{searchedBooks.length !== 0
-						? searchedBooks.map((book) => (
-								<Book key={book.id} book={book} addBook={addBook} />
-						  ))
+						? searchedBooks
+								.filter((book) => book?.imageLinks?.smallThumbnail)
+								.map((book) => <Book key={book.id} book={book} addBook={addBook} />)
 						: ""}
 				</ol>
 			</div>
