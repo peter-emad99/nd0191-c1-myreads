@@ -1,14 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import * as BooksAPI from "../BooksAPI";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Book from "../components/Book";
 import PropTypes from "prop-types";
 
 function SearchPage({ books, addBook }) {
 	const [query, setQuery] = useState("");
 	const [searchedBooks, setSearchedBooks] = useState([]);
-
+	const inputElem = useRef();
+	useEffect(() => {
+		inputElem.current.focus();
+	}, []);
 	useEffect(() => {
 		if (query !== "") {
 			BooksAPI.search(query, 10).then((books) =>
@@ -32,6 +35,7 @@ function SearchPage({ books, addBook }) {
 				</Link>
 				<div className="search-books-input-wrapper">
 					<input
+						ref={inputElem}
 						onChange={handleSearch}
 						type="text"
 						placeholder="Search by title, author, or ISBN"
