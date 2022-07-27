@@ -40,7 +40,7 @@ function SearchPage({ books, addBook }) {
 			</div>
 			<div className="search-books-results">
 				<ol className="books-grid">
-					{searchedBooks.length !== 0
+					{searchedBooks.length !== 0 && query
 						? searchedBooks
 								.filter((book) => book?.imageLinks?.smallThumbnail)
 								.map((book) => {
