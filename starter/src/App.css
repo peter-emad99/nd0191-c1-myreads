@@ -40,7 +40,9 @@ body,
 }
 
 .bookshelf-title {
-	border-bottom: 1px solid #dedede;
+	background-color: #77dd74;
+	color: #001f01;
+	text-align: center;
 }
 .bookshelf-books {
 	text-align: center;
@@ -124,6 +126,10 @@ body,
 
 .book {
 	width: 140px;
+	transition: transform 200ms ease-out;
+}
+.book:hover {
+	transform: scale(1.05);
 }
 .book-title,
 .book-authors {
@@ -169,6 +175,7 @@ body,
 .book-cover {
 	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 	background: #eee;
+	border-radius: 3px;
 }
 .book-cover-title {
 	padding: 20px 10px 0;
