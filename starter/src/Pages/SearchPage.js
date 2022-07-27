@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import * as BooksAPI from "../BooksAPI";
 import { useEffect, useState } from "react";
 import Book from "../components/Book";
+import PropTypes from "prop-types";
 
 function SearchPage({ books, addBook }) {
 	const [query, setQuery] = useState("");
@@ -58,5 +59,8 @@ function SearchPage({ books, addBook }) {
 		</div>
 	);
 }
-
+SearchPage.propTypes = {
+	books: PropTypes.array.isRequired,
+	addBook: PropTypes.func.isRequired,
+};
 export default SearchPage;

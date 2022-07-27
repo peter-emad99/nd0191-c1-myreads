@@ -9,7 +9,6 @@ function App() {
 	const [books, setBooks] = useState([]);
 	const addBook = (book) => {
 		setBooks([...books.filter((item) => item.id !== book.id), book]);
-		console.log(book);
 	};
 	useEffect(() => {
 		BooksAPI.getAll().then((data) => setBooks(data));

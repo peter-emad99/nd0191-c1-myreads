@@ -1,5 +1,6 @@
 import React from "react";
 import * as BooksAPI from "../BooksAPI";
+import PropTypes from "prop-types";
 
 function Book({ book, addBook }) {
 	// const selectElement = useRef();
@@ -46,5 +47,8 @@ function Book({ book, addBook }) {
 		</li>
 	);
 }
-
+Book.propTypes = {
+	book: PropTypes.object.isRequired,
+	addBook: PropTypes.func.isRequired,
+};
 export default Book;
