@@ -17,8 +17,21 @@ function Book({ book, addBook }) {
 		title,
 		imageLinks: { smallThumbnail },
 	} = book;
+	/** @param {DragEvent} e */
+	function handleDragStart(e) {
+		e.dataTransfer.setData("book", JSON.stringify(book));
+		// console.log(e);
+	}
 	return (
-		<li>
+		<li
+			onDragEnd={(e) => {
+				// console.log(e);
+			}}
+			draggable
+			onDragStart={(e) => {
+				handleDragStart(e);
+			}}
+		>
 			<div className="book">
 				<div className="book-top">
 					<div

@@ -22,17 +22,15 @@ function SearchPage({ books, addBook }) {
 			setSearchedBooks([]);
 		}
 	}, [query]);
+	function handleSearch(e) {
+		setQuery(e.target.value);
+	}
+	const debouncedHandleSearch = useMemo(() => debounce(handleSearch, 400), []);
 	useEffect(() => {
 		return () => {
 			debouncedHandleSearch.cancel();
 		};
-	}, []);
-	function handleSearch(e) {
-		// setInterval(setQuery(e.target.value), 10000);
-		// TODO: throttling and debouncing
-		setQuery(e.target.value);
-	}
-	const debouncedHandleSearch = useMemo(() => debounce(handleSearch, 400), []);
+	}, [debouncedHandleSearch]);
 
 	return (
 		<div className="search-books">

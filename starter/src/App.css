@@ -47,6 +47,9 @@ body,
 .bookshelf-books {
 	text-align: center;
 }
+.bookshelf-books.dragover {
+	background: rgb(199, 199, 199);
+}
 
 .open-search {
 	position: fixed;
